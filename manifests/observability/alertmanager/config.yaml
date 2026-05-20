@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  alertmanager.yml: |
+    global:
+      resolve_timeout: 5m
+
+    route:
+      group_by: ['alertname', 'cluster', 'instance']
+      group_wait: 10s
+      group_interval: 10s
+      repeat_interval: 12h
+      receiver: 'default-receiver'
+      routes:
+      - match:
+          severity: critical
+        receiver: 'critical-receiver'
+        repeat_interval: 5m
+
+    receivers:
+    - name: 'default-receiver'
+      # Placeholder: Add webhook, email, or other integrations here
+      # Example webhook:
+      # webhook_configs:
+      # - url: 'http://example.com/webhook'
+
+    - name: 'critical-receiver'
+      # Placeholder: Configure for critical alerts
+      # These repeat every 5 minutes vs 12 hours for warnings
+
+    inhibit_rules:
+    - source_match:
+        severity: 'critical'
+      target_match:
+        severity: 'warning'
+      equal: ['alertname', 'instance']
