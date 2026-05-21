@@ -2,6 +2,13 @@
 
 Lightweight monitoring solution for mixed-architecture K3s cluster (AMD64 desktop + ARM64 Raspberry Pi Zero 2W).
 
+
+![Grafana Dashboard](resources/dashboard-screenshot.png)
+
+*Example K3s cluster monitoring dashboard showing node metrics, resource usage, and system health*
+
+
+
 ## Architecture
 
 ```
@@ -212,6 +219,7 @@ In Grafana UI:
 **Import via JSON (alternative):**
 1. Download dashboard JSON from https://grafana.com/grafana/dashboards/[ID]
 2. In Grafana: **Create** → **Import** → **Upload JSON file**
+
 
 ### 6. Verify Data Persistence
 
